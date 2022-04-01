@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+Here I have created a clone of the Spotify's HUD, made with help of the video exercise: https://www.youtube.com/watch?v=HJ1AlSrgZVQ 
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
