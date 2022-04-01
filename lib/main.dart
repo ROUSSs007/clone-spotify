@@ -8,6 +8,7 @@ import 'package:flutter_spotify_ui/models/current_track_model.dart';
 import 'package:flutter_spotify_ui/screens/playlist_screen.dart';
 import 'package:flutter_spotify_ui/widgets/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,14 @@ void main() async {
       child: MyApp(),
     ),
   );
+
+  doWhenWindowReady(() {
+    const initialSize = Size(600, 800);
+    appWindow.minSize = initialSize;
+    appWindow.size = initialSize;
+    appWindow.alignment = Alignment.center;
+    appWindow.show();
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -74,6 +83,11 @@ class Shell extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          WindowTitleBarBox(
+            child: Row(
+              children: [Expanded(child: MoveWindow()), WindowButtons()],
+            ),
+          ),
           Expanded(
             child: Row(
               children: [
@@ -89,6 +103,23 @@ class Shell extends StatelessWidget {
           CurrentTrack(),
         ],
       ),
+    );
+  }
+}
+
+var buttonColors = WindowButtonColors(
+  iconNormal: Colors.white,
+);
+
+class WindowButtons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        MinimizeWindowButton(colors: buttonColors),
+        MaximizeWindowButton(colors: buttonColors),
+        CloseWindowButton(colors: buttonColors),
+      ],
     );
   }
 }
